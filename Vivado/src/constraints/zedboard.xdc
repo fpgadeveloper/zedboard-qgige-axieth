@@ -87,8 +87,8 @@ set_property IOSTANDARD LVCMOS25 [get_ports rgmii_port_3_rx_ctl]
 set_property IOSTANDARD LVCMOS25 [get_ports rgmii_port_3_tx_ctl]
 set_property IOSTANDARD LVCMOS25 [get_ports rgmii_port_3_rxc]
 set_property IOSTANDARD LVCMOS25 [get_ports rgmii_port_3_txc]
-set_property IOSTANDARD LVDS_25 [get_ports {ref_clk_p[0]}]
-set_property IOSTANDARD LVDS_25 [get_ports {ref_clk_n[0]}]
+set_property IOSTANDARD LVDS_25 [get_ports ref_clk_p]
+set_property IOSTANDARD LVDS_25 [get_ports ref_clk_n]
 set_property IOSTANDARD LVCMOS25 [get_ports {ref_clk_oe[0]}]
 set_property IOSTANDARD LVCMOS25 [get_ports {ref_clk_fsel[0]}]
 set_property PACKAGE_PIN L21 [get_ports {rgmii_port_1_rd[0]}]
@@ -150,26 +150,26 @@ set_property PACKAGE_PIN A17 [get_ports rgmii_port_3_txc]
 set_property PACKAGE_PIN C15 [get_ports rgmii_port_3_tx_ctl]
 set_property PACKAGE_PIN B15 [get_ports mdio_io_port_3_mdc]
 set_property PACKAGE_PIN A21 [get_ports mdio_io_port_3_io]
-set_property PACKAGE_PIN L19 [get_ports {ref_clk_n[0]}]
+set_property PACKAGE_PIN L19 [get_ports ref_clk_n]
 set_property PACKAGE_PIN L17 [get_ports {ref_clk_oe[0]}]
 set_property PACKAGE_PIN K19 [get_ports {ref_clk_fsel[0]}]
 set_property PACKAGE_PIN A22 [get_ports reset_port_3]
 
-current_instance design_1_i/axi_ethernet_0/eth_mac/U0
+current_instance design_1_i/axi_ethernet_0/U0/eth_mac/U0
 set_property IODELAY_GROUP tri_mode_ethernet_mac_iodelay_grp0 [get_cells {tri_mode_ethernet_mac_i/rgmii_interface/delay_rgmii_rx* tri_mode_ethernet_mac_i/rgmii_interface/rxdata_bus[*].delay_rgmii_rx*}]
 current_instance -quiet
-current_instance design_1_i/axi_ethernet_1/eth_mac/U0
+current_instance design_1_i/axi_ethernet_1/U0/eth_mac/U0
 set_property IODELAY_GROUP tri_mode_ethernet_mac_iodelay_grp0 [get_cells {rgmii_interface/delay_rgmii_rx* rgmii_interface/rxdata_bus[*].delay_rgmii_rx*}]
 current_instance -quiet
-current_instance design_1_i/axi_ethernet_2/eth_mac/U0
+current_instance design_1_i/axi_ethernet_2/U0/eth_mac/U0
 set_property IODELAY_GROUP tri_mode_ethernet_mac_iodelay_grp1 [get_cells {rgmii_interface/delay_rgmii_rx* rgmii_interface/rxdata_bus[*].delay_rgmii_rx*}]
 current_instance -quiet
-current_instance design_1_i/axi_ethernet_3/eth_mac/U0
+current_instance design_1_i/axi_ethernet_3/U0/eth_mac/U0
 set_property IODELAY_GROUP tri_mode_ethernet_mac_iodelay_grp1 [get_cells {rgmii_interface/delay_rgmii_rx* rgmii_interface/rxdata_bus[*].delay_rgmii_rx*}]
 current_instance -quiet
 
-set_property IODELAY_GROUP tri_mode_ethernet_mac_iodelay_grp0 [get_cells design_1_i/axi_ethernet_0/eth_mac/U0/tri_mode_ethernet_mac_idelayctrl_common_i]
+set_property IODELAY_GROUP tri_mode_ethernet_mac_iodelay_grp0 [get_cells design_1_i/axi_ethernet_0/U0/eth_mac/U0/tri_mode_ethernet_mac_idelayctrl_common_i]
 set_property IODELAY_GROUP tri_mode_ethernet_mac_iodelay_grp1 [get_cells design_1_i/idelay_ctrl_0/U0/idelayctrl_inst]
 
-create_clock -period 8.000 -name ref_clk_p[0] -waveform {0.000 4.000} [get_ports {ref_clk_p[0]}]
+create_clock -period 8.000 -name ref_clk_p -waveform {0.000 4.000} [get_ports ref_clk_p]
 
