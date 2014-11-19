@@ -46,6 +46,16 @@
 #include "lwip/dhcp.h"
 #endif
 
+#include "ethfmc_axie.h"
+
+/* Set the following DEFINE to the base address
+ * of the Ethernet MAC that you want to hook up
+ * to the lwIP echo server. Unfortunately, only
+ * one port can be connected to it in this
+ * version of the code.
+ */
+#define EMAC_BASEADDR XPAR_AXIETHERNET_0_BASEADDR
+
 /* defined by each RAW mode application */
 void print_app_header();
 int start_application();
@@ -99,6 +109,9 @@ int main()
 
 	init_platform();
 
+	/* PHY Autoneg and EMAC configuration */
+	EthFMC_init_axiemac(EMAC_BASEADDR,mac_ethernet_address);
+
 #if LWIP_DHCP==1
     ipaddr.addr = 0;
 	gw.addr = 0;
@@ -116,7 +129,7 @@ int main()
   	/* Add network interface to the netif_list, and set it as default */
 	if (!xemac_add(echo_netif, &ipaddr, &netmask,
 						&gw, mac_ethernet_address,
-						PLATFORM_EMAC_BASEADDR)) {
+						EMAC_BASEADDR)) {
 		xil_printf("Error adding N/W interface\n\r");
 		return -1;
 	}
