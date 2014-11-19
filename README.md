@@ -10,7 +10,7 @@ The design contains 4 AXI Ethernet blocks configured with DMAs.
 
 ### Requirements
 
-* Vivado 2014.2
+* Vivado 2014.3.1
 * ZedBoard
 
 ### License
