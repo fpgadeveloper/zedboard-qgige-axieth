@@ -8,11 +8,14 @@ Example design for the [Quad Gigabit Ethernet FMC](http://ethernetfmc.com "Ether
 This project demonstrates the use of the Opsero [Quad Gigabit Ethernet FMC](http://ethernetfmc.com "Ethernet FMC").
 The design contains 4 AXI Ethernet blocks configured with DMAs.
 
+![All AXI Ethernet](http://ethernetfmc.com/wp-content/uploads/2014/10/qgige_all_axi_ethernet.png "Ethernet FMC Quad Gig Ethernet All AXI Ethernet")
+
 ### Requirements
 
 * Vivado 2014.3.1 (see Library modifications below)
 * [Ethernet FMC](http://ethernetfmc.com "Ethernet FMC")
 * [ZedBoard](http://zedboard.org "ZedBoard")
+* [Xilinx Soft TEMAC license](http://ethernetfmc.com/getting-a-license-for-the-xilinx-tri-mode-ethernet-mac/ "Xilinx Soft TEMAC license")
 
 ### Library modifications for Vivado 2014.3.1
 
