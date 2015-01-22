@@ -54,7 +54,7 @@
  * to the lwIP echo server. Only one port can be connected
  * to it in this version of the code.
  */
-#define ETH_FMC_PORT 0
+#define ETH_FMC_PORT 2
 
 /*
  * NOTE: The BSP setting "use_axieth_on_zynq" must be set to 1.
@@ -110,9 +110,11 @@ print_ip_settings(struct ip_addr *ip, struct ip_addr *mask, struct ip_addr *gw)
 	print_ip("Gateway : ", gw);
 }
 
-#if XPAR_GIGE_PCS_PMA_CORE_PRESENT == 1
+#ifdef __arm__
+#if XPAR_GIGE_PCS_PMA_SGMII_CORE_PRESENT == 1 || XPAR_GIGE_PCS_PMA_1000BASEX_CORE_PRESENT == 1
 int ProgramSi5324(void);
 int ProgramSfpPhy(void);
+#endif
 #endif
 int main()
 {
@@ -123,9 +125,11 @@ int main()
 	{ 0x00, 0x0a, 0x35, 0x00, 0x01, 0x02 };
 
 	echo_netif = &server_netif;
-#if XPAR_GIGE_PCS_PMA_CORE_PRESENT == 1
+#ifdef __arm__
+#if XPAR_GIGE_PCS_PMA_SGMII_CORE_PRESENT == 1 || XPAR_GIGE_PCS_PMA_1000BASEX_CORE_PRESENT == 1
 	ProgramSi5324();
 	ProgramSfpPhy();
+#endif
 #endif
 
 	init_platform();
