@@ -35,17 +35,15 @@
 	phy-mode = "rgmii-id";
 	status = "okay";
 	xlnx,ptp-enet-clock = <0x69f6bcb>;
-        phy-handle = <2>;
+  phy-handle = <&phy0>;
 	ps7_ethernet_0_mdio: mdio {
 		#address-cells = <1>;
 		#size-cells = <0>;
-                phy@0 {
+                phy0: phy@0 {
                    compatible = "marvell,88e1510";
                    device_type = "ethernet-phy";
                    reg = <0>;
-			marvell,reg-init = <0x3 0x10 0xff00 0x1e 0x3 0x11 0xfff0 0xa>;
-			linux,phandle = <0x2>;
-			phandle = <0x2>;
+                   marvell,reg-init = <0x3 0x10 0xff00 0x1e 0x3 0x11 0xfff0 0xa>;
                 };
 	};
 };
