@@ -52,10 +52,9 @@ Add the following define statement to the code:
 That defines the PHY model identifier for the Marvell 88E1510 PHYs that are
 found on the Ethernet FMC.
 
-Add the following function code just above the function: `unsigned get_IEEE_phy_speed(XAxiEthernet *xaxiemacp)`:
+Add the following function code just above the function called get_IEEE_phy_speed:
 
-`
-unsigned int get_phy_speed_88E1510(XAxiEthernet *xaxiemacp, u32 phy_addr)
+`unsigned int get_phy_speed_88E1510(XAxiEthernet *xaxiemacp, u32 phy_addr)
 {
 	u16 temp;
 	u16 phy_identifier;
