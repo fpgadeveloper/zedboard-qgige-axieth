@@ -3,7 +3,6 @@
 	<name>echo_server_bsp</name>
 	<comment>Created by SDK v2014.3</comment>
 	<projects>
-		<project>design_1_wrapper_hw_platform_0</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

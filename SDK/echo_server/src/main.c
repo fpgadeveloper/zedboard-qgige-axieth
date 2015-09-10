@@ -18,8 +18,8 @@
 *
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-* XILINX CONSORTIUM BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+* XILINX  BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF
 * OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
@@ -42,6 +42,8 @@
 #include "xil_printf.h"
 #endif
 
+#include "lwip/tcp.h"
+
 #if LWIP_DHCP==1
 #include "lwip/dhcp.h"
 #endif
@@ -54,7 +56,7 @@
  * to the lwIP echo server. Only one port can be connected
  * to it in this version of the code.
  */
-#define ETH_FMC_PORT 2
+#define ETH_FMC_PORT 0
 
 /*
  * NOTE: The BSP setting "use_axieth_on_zynq" must be set to 1.
@@ -90,6 +92,8 @@ extern volatile int dhcp_timoutcntr;
 err_t dhcp_start(struct netif *netif);
 #endif
 
+extern volatile int TcpFastTmrFlag;
+extern volatile int TcpSlowTmrFlag;
 static struct netif server_netif;
 struct netif *echo_netif;
 
@@ -138,17 +142,17 @@ int main()
 	/* PHY Autoneg and EMAC configuration */
 	EthFMC_init_axiemac(EMAC_BASEADDR,mac_ethernet_address);
 #endif
-
+/*
 #if LWIP_DHCP==1
     ipaddr.addr = 0;
 	gw.addr = 0;
 	netmask.addr = 0;
-#else
+#else*/
 	/* initliaze IP addresses to be used */
 	IP4_ADDR(&ipaddr,  192, 168,   1, 10);
 	IP4_ADDR(&netmask, 255, 255, 255,  0);
 	IP4_ADDR(&gw,      192, 168,   1,  1);
-#endif	
+/*#endif*/
 	print_app_header();
 
 	lwip_init();
@@ -201,6 +205,14 @@ int main()
 
 	/* receive and process packets */
 	while (1) {
+		if (TcpFastTmrFlag) {
+			tcp_fasttmr();
+			TcpFastTmrFlag = 0;
+		}
+		if (TcpSlowTmrFlag) {
+			tcp_slowtmr();
+			TcpSlowTmrFlag = 0;
+		}
 		xemacif_input(echo_netif);
 		transfer_data();
 	}
