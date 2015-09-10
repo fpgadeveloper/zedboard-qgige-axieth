@@ -54,7 +54,8 @@ found on the Ethernet FMC.
 
 Add the following function code just above the function called `get_IEEE_phy_speed`:
 
-```unsigned int get_phy_speed_88E1510(XAxiEthernet *xaxiemacp, u32 phy_addr)
+```c
+unsigned int get_phy_speed_88E1510(XAxiEthernet *xaxiemacp, u32 phy_addr)
 {
 	u16 temp;
 	u16 phy_identifier;
@@ -139,23 +140,27 @@ Add the following function code just above the function called `get_IEEE_phy_spe
 		return 100;
 	else					/* 10Mbps */
 		return 10;
-}```
+}
+```
 
 That is a custom function that communicates with the 88E1510 PHY to determine the autonegotiated link speed.
 
 Now find this block of code:
 
-```	if (phy_identifier == MARVEL_PHY_IDENTIFIER) {
+```c
+	if (phy_identifier == MARVEL_PHY_IDENTIFIER) {
 		if (phy_model == MARVEL_PHY_88E1116R_MODEL) {
 			return get_phy_speed_88E1116R(xaxiemacp, phy_addr);
 		} else if (phy_model == MARVEL_PHY_88E1111_MODEL) {
 			return get_phy_speed_88E1111(xaxiemacp, phy_addr);
 		}
-	}```
+	}
+```
 
 and replace it with this block of code:
 
-```	if (phy_identifier == MARVEL_PHY_IDENTIFIER) {
+```c
+	if (phy_identifier == MARVEL_PHY_IDENTIFIER) {
 		if (phy_model == MARVEL_PHY_88E1116R_MODEL) {
 			return get_phy_speed_88E1116R(xaxiemacp, phy_addr);
 		} else if (phy_model == MARVEL_PHY_88E1111_MODEL) {
@@ -163,7 +168,8 @@ and replace it with this block of code:
 		} else if (phy_model == MARVEL_PHY_88E1510_MODEL) {
 			return get_phy_speed_88E1510(xaxiemacp, phy_addr);
 		}
-	}```
+	}
+```
 
 We have just added an extra else-if statement to call our custom PHY speed function added earlier.
 
