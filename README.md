@@ -20,7 +20,7 @@ The design contains 4 AXI Ethernet blocks configured with DMAs.
 ### Library modifications for Vivado 2015.2
 
 To use this project, some modifications must be made to the lwIP libraries
-provided by the Xilinx SDK. The modification can be made either to the
+provided by the Xilinx SDK. These modifications can be made either to the
 BSP code of your SDK workspace, or to the SDK sources. I personally
 recommend modifying the SDK sources as every rebuild of the BSP results
 in the BSP sources being overwritten with the SDK sources.
