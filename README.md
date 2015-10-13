@@ -17,6 +17,12 @@ The design contains 4 AXI Ethernet blocks configured with DMAs.
 * [ZedBoard](http://zedboard.org "ZedBoard")
 * [Xilinx Soft TEMAC license](http://ethernetfmc.com/getting-a-license-for-the-xilinx-tri-mode-ethernet-mac/ "Xilinx Soft TEMAC license")
 
+### Single port limit
+
+This example supports lwIP running on only one port of the Ethernet FMC. You can configure the port
+on which to run lwIP by setting the `ETH_FMC_PORT` define in the `main.c` file of the SDK application.
+Valid values for `ETH_FMC_PORT` are 0,1,2 or 3.
+
 ### Library modifications for Vivado 2015.3
 
 To use this project, some modifications must be made to the lwIP libraries
