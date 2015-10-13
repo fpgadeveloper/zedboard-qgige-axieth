@@ -45,7 +45,7 @@ With this one:
 
 `dmaconfig = XAxiDma_LookupConfig(xemac->topology_index);`
 
-#### Modification to xemacpsif_physpeed.c
+#### Modification to xaxiemacif_physpeed.c
 
 Open the following file:
 
