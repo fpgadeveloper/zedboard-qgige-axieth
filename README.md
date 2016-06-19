@@ -1,6 +1,11 @@
 zedboard-qgige-axieth
 =====================
 
+### This repo has moved
+
+This repo has been merged into the [Ethernet FMC AXI Ethernet repo](https://github.com/fpgadeveloper/ethernet-fmc-axi-eth "Ethernet FMC AXI Eth")
+in an effort to group similar example designs into a common repository and simplify code maintenance. Please use the linked repository for the latest sources.
+
 Example design for the [Quad Gigabit Ethernet FMC](http://ethernetfmc.com "Ethernet FMC") on the [ZedBoard](http://zedboard.org "ZedBoard") using AXI Ethernet
 
 ### Description
