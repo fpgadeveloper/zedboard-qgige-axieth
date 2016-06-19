@@ -46,7 +46,7 @@ apply_bd_automation -rule xilinx.com:bd_rule:processing_system7 -config {make_ex
 
 # Configure the PS: Generate 200MHz clock, Enable HP0, Enable interrupts
 startgroup
-set_property -dict [list CONFIG.PCW_FPGA1_PERIPHERAL_FREQMHZ {200} CONFIG.PCW_USE_S_AXI_HP0 {1} CONFIG.PCW_USE_FABRIC_INTERRUPT {1} CONFIG.PCW_EN_CLK1_PORT {1} CONFIG.PCW_IRQ_F2P_INTR {1}] [get_bd_cells processing_system7_0]
+set_property -dict [list CONFIG.PCW_I2C0_PERIPHERAL_ENABLE {1} CONFIG.PCW_FPGA1_PERIPHERAL_FREQMHZ {200} CONFIG.PCW_USE_S_AXI_HP0 {1} CONFIG.PCW_USE_FABRIC_INTERRUPT {1} CONFIG.PCW_EN_CLK1_PORT {1} CONFIG.PCW_IRQ_F2P_INTR {1}] [get_bd_cells processing_system7_0]
 endgroup
 
 # Connect the FCLK_CLK0 to the PS GP0
@@ -59,6 +59,12 @@ endgroup
 connect_bd_net [get_bd_pins xlconcat_0/dout] [get_bd_pins processing_system7_0/IRQ_F2P]
 startgroup
 set_property -dict [list CONFIG.NUM_PORTS {16}] [get_bd_cells xlconcat_0]
+endgroup
+
+# Add the port for IIC
+startgroup
+create_bd_intf_port -mode Master -vlnv xilinx.com:interface:iic_rtl:1.0 iic_fmc
+connect_bd_intf_net [get_bd_intf_pins processing_system7_0/IIC_0] [get_bd_intf_ports iic_fmc]
 endgroup
 
 # Add the AXI Ethernet IPs
